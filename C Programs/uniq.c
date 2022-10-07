@@ -7,11 +7,8 @@ int main(int argc, char* argv[])
     int lenMax = 100;
     int maxSize = 100;
     int count = 0;
-
     int ended = 0;
-
     char **strArr = (char**) malloc(lenMax * sizeof(char*));
-
 
     for(int i = 0; i < lenMax; i++)
     {
@@ -41,7 +38,6 @@ int main(int argc, char* argv[])
             ended = 1;
         }
         
-
         if(inputMax > maxSize)
         {
             maxSize = inputMax + maxSize;
@@ -54,49 +50,20 @@ int main(int argc, char* argv[])
         
         if(strlen(line) != 0)
         {
-                strcpy(strArr[row], line);
-                row++;
+            strcpy(strArr[row], line);
+            row++;
         }        
         free(line);       
     }
-    /*
-    int* repetitions = (int*)malloc(sizeof(int) * lenMax);
-    int intMax = 100;
-    int length = 0;
-    int indexTwo = 0;
-    int numOfReps = 0;
-    int arrRows = sizeof(strArr)/sizeof(strArr[0]);
-    
-    while(length != arrRows)
-    {
-        if(intMax > maxSize)
-        {
-            maxSize = intMax + maxSize;
-            repetitions = realloc(repetitions, maxSize);
-        }
-
-        if(strcmp(strArr[indexTwo], strArr[indexTwo + 1]) == 0)
-        {
-            numOfReps++;
-        }
-        else
-        {
-            numOfReps = 1;
-        }
-        repetitions[indexTwo] = numOfReps;
-        length++;
-        indexTwo++;
-
-    }
-    */
+   
     
     int counter = 1;
     char* duplicate = malloc(sizeof(strArr[0]));
     strncpy(duplicate, strArr[0], sizeof(strArr[0]));
     free(strArr[0]);   
     printf("\n");
-
-    for(int j = 1; j < sizeof(strArr); j++)
+    
+    for(int j = 1; j < row; j++)
     {  
         if(strlen(strArr[j])>0)
         {
@@ -107,9 +74,9 @@ int main(int argc, char* argv[])
                 printf("%d %s\n", counter, duplicate);
                 duplicate =  strcpy(duplicate, strArr[j]);
                 counter = 1;
-            }
-            free(strArr[j]);               
+            }             
         }
+        free(strArr[j]);  
         
     }
     free(strArr);
