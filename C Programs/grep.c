@@ -24,7 +24,7 @@ void main(int argc, char** argv){
     
     int ended = 0;
     while(!ended){
-        char* input = malloc(sizeof(char)*lenMax);
+        char* input = calloc(currentMax, sizeof(char));
         int inputtedChar = EOF;
         int index = 0;
         while((inputtedChar = getchar()) != '\n' && inputtedChar != EOF){
