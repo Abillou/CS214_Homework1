@@ -6,6 +6,7 @@
 int main(int argc, char** argv){
     int lenMax = 128;
     int currentMax = 128;
+    int inputCurrentMax = 128;
     int numbers = 0;
 
     int currentRow = 0;
@@ -20,13 +21,13 @@ int main(int argc, char** argv){
     }
 
     int ended = 0;
-
+    
     while(!ended){
        
-        char* input = malloc(sizeof(char)*lenMax);
+        char* input = malloc(sizeof(char)*inputCurrentMax);
         int inputtedChar = EOF;
         int index = 0;
-        int inputCurrentMax = 128;
+        
         while((inputtedChar = getchar()) != '\n' && inputtedChar != EOF){
             input[index++] = (char) inputtedChar;
             if(index == inputCurrentMax){
@@ -34,21 +35,23 @@ int main(int argc, char** argv){
                 input = realloc(input, inputCurrentMax);
             }
         }
+        
         if(inputtedChar == EOF){
             ended = 1;
             break;
         }
         input[strcspn(input, "\n")] = 0;
-
+        
         if(inputCurrentMax > currentMax){
             currentMax = inputCurrentMax + currentMax;
             arr = realloc(arr, currentMax);
-            for (int i = 0; i < lenMax; i++)
+            for (int i = 0; i < sizeof(arr); i++)
                 arr[i] = realloc(arr[i], currentMax);
         }
+        
 
         if(strlen(input) != 0){
-            strncpy(arr[currentRow], input, sizeof(input));
+            strcpy(arr[currentRow], input);
             currentRow++;
         }
         

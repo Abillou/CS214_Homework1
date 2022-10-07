@@ -13,7 +13,10 @@ int isPrime(int number){
 }
 
 int main(int argc, char** argv){
-
+    if(argc != 2){
+        printf("Error! No number inputted.\n");
+        return 0;
+    }
     int a = atoi(argv[1]);
     if(isPrime(a)){
         printf("%d\n", a);
