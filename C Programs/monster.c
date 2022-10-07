@@ -13,7 +13,7 @@ void printGrid(
   . G . . . \n
   . . . M . \n
   */
-  char* dispString = (char*)malloc(((boardX * boardY * 2) + boardY) * sizeof(char));
+  char* dispString = (char*)calloc(((boardX * boardY * 2) + boardY), sizeof(char));
 
   for (i = 0; i < boardY; i++) {
     for (j = 0; j < boardX; j++) {
@@ -46,7 +46,7 @@ void moveCloserVertically(
   if (plrY > *monY && !(*monY + 1 == goalY && *monX == goalX)) {
     *monY = *monY + 1;
     printf("\nmonster moves N\n");
-  } else if (!(*monY + 1 == goalY && *monX == goalX)) {
+  } else if (!(*monY - 1 == goalY && *monX == goalX)) {
     *monY = *monY - 1;
     printf("\nmonster moves S\n");
   } else {
@@ -60,7 +60,7 @@ void moveCloserHorizontally(
   if (plrX > *monX && !(*monY == goalY && *monX + 1 == goalX)) {
     *monX = *monX + 1;
     printf("\nmonster moves E\n");
-  } else if (!(*monY == goalY && *monX + 1 == goalX)) {
+  } else if (!(*monY == goalY && *monX - 1 == goalX)) {
     *monX = *monX - 1;
     printf("\nmonster moves W\n");
   } else {
@@ -73,7 +73,7 @@ void playGame(
 ) {
   int gameWon = 0;
   int gameLost = 0;
-  int invalidMove = 0;
+  int notFirstMove = 0;
 
   // Game loop
   while (!gameWon && !gameLost) {
@@ -82,57 +82,63 @@ void playGame(
 
     // Get player input
   getPlayerInput:
-    if(invalidMove) getchar();
+    if(notFirstMove == 1) {
+      getchar();
+    }
     printf("Enter a direction (N, S, E, W): ");
-    char input = getchar();
+    char input = '\n';
+    while(input != 'N' && input != 'S' && input != 'E' && input != 'W') {
+      input = getchar();
+      if(input != 'N' && input != 'S' && input != 'E' && input != 'W') {
+        printf("\ninvalid input.\n");
+        printf("\nEnter a direction (N, S, E, W): ");
+      }
+    }
 
     // Move player
     switch (input) {
       case 'W':
         if (plrX > 0) {
           plrX--;
-          invalidMove = 0;
         }
         else {
           printf("invalid move\n");
-          invalidMove = 1;
           goto getPlayerInput;
         }
         break;
       case 'S':
         if (plrY > 0) {
           plrY--;
-          invalidMove = 0;
         }
         else {
           printf("invalid move\n");
-          invalidMove = 1;
           goto getPlayerInput;
         }
         break;
       case 'E':
         if (plrX < boardX - 1) {
           plrX++;
-          invalidMove = 0;
         }
         else {
           printf("invalid move\n");
-          invalidMove = 1;
           goto getPlayerInput;
         }
         break;
       case 'N':
         if (plrY < boardY - 1) {
           plrY++;
-          invalidMove = 0;
         }
         else {
           printf("invalid move\n");
-          invalidMove = 1;
           goto getPlayerInput;
         }
         break;
+      default:
+        printf("invalid move\n");
+        goto getPlayerInput;
     }
+
+    notFirstMove = 1;
 
     if(plrX == goalX && plrY == goalY) {
       gameWon = 1;
