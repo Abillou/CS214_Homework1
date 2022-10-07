@@ -20,7 +20,7 @@ void main(int argc, char** argv){
         match = argv[2];
     }
     else{
-        printf("INVALID ARGUMENTS!");
+        printf("INVALID ARGUMENTS!\n");
         return;
     }
     
@@ -42,15 +42,15 @@ void main(int argc, char** argv){
         
     
         if(caseSensitive){
-            char* lowerA = malloc(sizeof(input));
-            strncpy(lowerA, input, sizeof(input));
+            char* lowerA = malloc(currentMax);
+            strncpy(lowerA, input, currentMax);
 
-            char* lowerB = malloc(sizeof(match));
-            strncpy(lowerB, match, sizeof(match));
+            char* lowerB = malloc(strlen(match));
+            strncpy(lowerB, match, strlen(match));
 
-            for(int m = 0; m < sizeof(lowerA); m++)
+            for(int m = 0; m < currentMax; m++)
                 lowerA[m]= tolower(lowerA[m]);
-            for(int m = 0; m < sizeof(lowerB); m++)
+            for(int m = 0; m < strlen(match); m++)
                 lowerB[m]= tolower(lowerB[m]);
 
             if(strstr(lowerA, lowerB))
