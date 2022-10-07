@@ -45,12 +45,12 @@ void moveCloserVertically(
 ) {
   if (plrY > *monY && !(*monY + 1 == goalY && *monX == goalX)) {
     *monY = *monY + 1;
-    printf("\nmonster moves N\n");
+    printf("Monster moves N\n");
   } else if (!(*monY - 1 == goalY && *monX == goalX)) {
     *monY = *monY - 1;
-    printf("\nmonster moves S\n");
+    printf("Monster moves S\n");
   } else {
-    printf("\nmonster forefits move\n");
+    printf("Monster forefits Move\n");
   }
 }
 
@@ -59,12 +59,12 @@ void moveCloserHorizontally(
 ) {
   if (plrX > *monX && !(*monY == goalY && *monX + 1 == goalX)) {
     *monX = *monX + 1;
-    printf("\nmonster moves E\n");
+    printf("Monster moves E\n");
   } else if (!(*monY == goalY && *monX - 1 == goalX)) {
     *monX = *monX - 1;
-    printf("\nmonster moves W\n");
+    printf("Monster moves W\n");
   } else {
-    printf("\nmonster forefits move\n");
+    printf("Monster forefits Move.\n");
   }
 }
 void playGame(
@@ -89,10 +89,7 @@ void playGame(
     char input = '\n';
     while(input != 'N' && input != 'S' && input != 'E' && input != 'W') {
       input = getchar();
-      if(input != 'N' && input != 'S' && input != 'E' && input != 'W') {
-        printf("\ninvalid input.\n");
-        printf("\nEnter a direction (N, S, E, W): ");
-      }
+      
     }
 
     // Move player
@@ -102,7 +99,7 @@ void playGame(
           plrX--;
         }
         else {
-          printf("invalid move\n");
+          printf("Invalid Move\n");
           goto getPlayerInput;
         }
         break;
@@ -111,7 +108,7 @@ void playGame(
           plrY--;
         }
         else {
-          printf("invalid move\n");
+          printf("Invalid Move\n");
           goto getPlayerInput;
         }
         break;
@@ -120,7 +117,7 @@ void playGame(
           plrX++;
         }
         else {
-          printf("invalid move\n");
+          printf("Invalid Move\n");
           goto getPlayerInput;
         }
         break;
@@ -129,12 +126,12 @@ void playGame(
           plrY++;
         }
         else {
-          printf("invalid move\n");
+          printf("Invalid Move\n");
           goto getPlayerInput;
         }
         break;
       default:
-        printf("invalid move\n");
+        printf("Invalid Move\n");
         goto getPlayerInput;
     }
 
@@ -180,10 +177,10 @@ void playGame(
   }
 
   if(gameWon) {
-    printf("player wins!");
+    printf("Player wins!\n");
   }
   else if(gameLost) {
-    printf("monster wins!");
+    printf("Monster wins!\n");
   }
 }
 
