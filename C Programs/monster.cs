@@ -9,7 +9,8 @@ using System.Text;
 public class Monster {
   public static void PrintGrid(
     int boardX, int boardY, int plrX, int plrY, 
-    int goalX, int goalY, int monX, int monY) {
+    int goalX, int goalY, int monX, int monY
+    ) {
 
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < boardY; i++) {
@@ -28,8 +29,9 @@ public class Monster {
     }
     Console.WriteLine(sb.ToString());
   }
-  public static void MoveCloserVertically(int plrX, int plrY, 
-    ref int monX, ref int monY, int goalX, int goalY) {
+  public static void MoveCloserVertically(
+    int plrX, int plrY, ref int monX, ref int monY, int goalX, int goalY
+    ) {
 
     // No need to bound check on monster if we're bound checking on player
     if (plrY > monY && !(monY + 1 == goalY && monX == goalX)) {
