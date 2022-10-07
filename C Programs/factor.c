@@ -15,8 +15,6 @@ int isPrime(int number){
 int main(int argc, char** argv){
 
     int a = atoi(argv[1]);
-    int primeFactorCount = 0;
-    int repeatPrimeFactor = 0;
     if(isPrime(a)){
         printf("%d\n", a);
     }
