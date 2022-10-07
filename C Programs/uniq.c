@@ -18,33 +18,30 @@ int main(int argc, char* argv[])
         strArr[i] = (char*)malloc(lenMax * sizeof(char));
     }
 
+    int row = 0;
+    int inputMax = 100;
     while(!ended)
     {
         char* line = malloc(sizeof(char) * maxSize);
         int exitChar = EOF;
-        int index = 0;
-        int inputMax = 100;
+        int index = 0;     
         int num = 0;
-
-        int row = 0;
-
         while((exitChar = getchar()) != '\n' && exitChar != EOF)
         {
-            line[index] = (char) exitChar;
-            if(index == maxSize)
+            line[index++] = (char) exitChar;
+            if(index == inputMax)
             {
                 inputMax = index + lenMax;
                 line = realloc(line, inputMax);
             }
-            index++;
         }
 
         if(exitChar == EOF)
         {
             ended = 1;
-            //break;
         }
         
+
         if(inputMax > maxSize)
         {
             maxSize = inputMax + maxSize;
@@ -53,19 +50,16 @@ int main(int argc, char* argv[])
             {
                 strArr[i] = realloc(strArr[i], maxSize);
             }
-
-
         }
+        
         if(strlen(line) != 0)
         {
-                strncpy(strArr[row], line, sizeof(line));
+                strcpy(strArr[row], line);
                 row++;
-        }
-
-
-
-        free(line);
+        }        
+        free(line);       
     }
+    /*
     int* repetitions = (int*)malloc(sizeof(int) * lenMax);
     int intMax = 100;
     int length = 0;
@@ -94,22 +88,31 @@ int main(int argc, char* argv[])
         indexTwo++;
 
     }
-
+    */
     
-    int skip = 0;
-    /*for(int j = 0; j < sizeof(strArr); j++)
-    {   
-        if(strlen(strArr[j] > 0))
+    int counter = 1;
+    char* duplicate = malloc(sizeof(strArr[0]));
+    strncpy(duplicate, strArr[0], sizeof(strArr[0]));
+    free(strArr[0]);   
+    printf("\n");
+
+    for(int j = 1; j < sizeof(strArr); j++)
+    {  
+        if(strlen(strArr[j])>0)
         {
-            printf("%s\n", strArr[j]);
+            if(strcmp(duplicate, strArr[j])==0){
+                        counter++;
+            }
+            else{
+                printf("%d %s\n", counter, duplicate);
+                duplicate =  strcpy(duplicate, strArr[j]);
+                counter = 1;
+            }
+            free(strArr[j]);               
         }
         
-        
-
-        //skip += repetitions[j];
-
-    }*/
-    
-    printf("%s\n%s\n", strArr[0], strArr[1]);
+    }
+    free(strArr);
+    printf("%d %s\n", counter, duplicate);
     
 }
