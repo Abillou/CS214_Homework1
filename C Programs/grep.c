@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include <ctype.h>
+
 
 void main(int argc, char** argv){
     char* match;
@@ -39,8 +41,23 @@ void main(int argc, char** argv){
             ended = 1;
         
     
-        if(caseSensitive && strcasecmp(input, match)){
-            printf("%s\n", input);
+        if(caseSensitive){
+            char* lowerA = malloc(sizeof(input));
+            strncpy(lowerA, input, sizeof(input));
+
+            char* lowerB = malloc(sizeof(match));
+            strncpy(lowerB, match, sizeof(match));
+
+            for(int m = 0; m < sizeof(lowerA); m++)
+                lowerA[m]= tolower(lowerA[m]);
+            for(int m = 0; m < sizeof(lowerB); m++)
+                lowerB[m]= tolower(lowerB[m]);
+
+            if(strstr(lowerA, lowerB))
+                printf("%s\n", input);
+            
+            free(lowerA);
+            free(lowerB);
         }
         else if(strstr(input, match)){
             printf("%s\n", input);
